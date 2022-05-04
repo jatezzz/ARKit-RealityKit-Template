@@ -17,14 +17,19 @@ final class DataModel: ObservableObject {
 
     @Published var arView: ARView!
     
+    var container: ModelEntity = ModelEntity()
+    
     init() {
-        // Create the 3D view
         arView = ARView(frame: .zero)
         
-        // Load the "Box" scene from the "Experience" Reality File
         let boxAnchor = try! Experience.loadBox()
         
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
+        boxAnchor.generateCollisionShapes(recursive: true)
+        //First you have to set physic enabled on Reality Composer
+        let box = boxAnchor.steelBox as? Entity & HasCollision
+        arView.installGestures(for: box!)
+        arView.scene.addAnchor(boxAnchor)
+        arView.debugOptions = .showPhysics
     }
+    
 }
