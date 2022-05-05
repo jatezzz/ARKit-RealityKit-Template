@@ -10,9 +10,9 @@
 		A212B1452824282F001A9588 /* GeometryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B1442824282F001A9588 /* GeometryUtils.swift */; };
 		A212B1462824291C001A9588 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFC0628232BAD00952A70 /* DataModel.swift */; };
 		A212B14828245D99001A9588 /* CustomContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14728245D99001A9588 /* CustomContext.swift */; };
-		A212B14B28246BB6001A9588 /* ManualManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14A28246BB6001A9588 /* ManualManipulation.swift */; };
+		A212B14B28246BB6001A9588 /* ZoomStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14A28246BB6001A9588 /* ZoomStrategy.swift */; };
 		A212B14D28246C00001A9588 /* GestureManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14C28246C00001A9588 /* GestureManipulation.swift */; };
-		A212B14F28246C5D001A9588 /* RecordTranslation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14E28246C5D001A9588 /* RecordTranslation.swift */; };
+		A212B14F28246C5D001A9588 /* GrabStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14E28246C5D001A9588 /* GrabStrategy.swift */; };
 		A212B15128246CA8001A9588 /* PointerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B15028246CA8001A9588 /* PointerStrategy.swift */; };
 		A212B15328246CC5001A9588 /* MeasureStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B15228246CC5001A9588 /* MeasureStrategy.swift */; };
 		A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBF6282329B500952A70 /* AppDelegate.swift */; };
@@ -26,9 +26,9 @@
 /* Begin PBXFileReference section */
 		A212B1442824282F001A9588 /* GeometryUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryUtils.swift; sourceTree = "<group>"; };
 		A212B14728245D99001A9588 /* CustomContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContext.swift; sourceTree = "<group>"; };
-		A212B14A28246BB6001A9588 /* ManualManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualManipulation.swift; sourceTree = "<group>"; };
+		A212B14A28246BB6001A9588 /* ZoomStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStrategy.swift; sourceTree = "<group>"; };
 		A212B14C28246C00001A9588 /* GestureManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureManipulation.swift; sourceTree = "<group>"; };
-		A212B14E28246C5D001A9588 /* RecordTranslation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTranslation.swift; sourceTree = "<group>"; };
+		A212B14E28246C5D001A9588 /* GrabStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabStrategy.swift; sourceTree = "<group>"; };
 		A212B15028246CA8001A9588 /* PointerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerStrategy.swift; sourceTree = "<group>"; };
 		A212B15228246CC5001A9588 /* MeasureStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureStrategy.swift; sourceTree = "<group>"; };
 		A24BFBF3282329B500952A70 /* ARTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,9 +55,9 @@
 		A212B14928246B8B001A9588 /* Strategies */ = {
 			isa = PBXGroup;
 			children = (
-				A212B14A28246BB6001A9588 /* ManualManipulation.swift */,
+				A212B14A28246BB6001A9588 /* ZoomStrategy.swift */,
 				A212B14C28246C00001A9588 /* GestureManipulation.swift */,
-				A212B14E28246C5D001A9588 /* RecordTranslation.swift */,
+				A212B14E28246C5D001A9588 /* GrabStrategy.swift */,
 				A212B15028246CA8001A9588 /* PointerStrategy.swift */,
 				A212B15228246CC5001A9588 /* MeasureStrategy.swift */,
 			);
@@ -115,6 +115,7 @@
 				A24BFBEF282329B500952A70 /* Sources */,
 				A24BFBF0282329B500952A70 /* Frameworks */,
 				A24BFBF1282329B500952A70 /* Resources */,
+				A212B1542824803C001A9588 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -170,6 +171,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A212B1542824803C001A9588 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint lint --quiet $@ | sed 's/error: /warning: /g'\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A24BFBEF282329B500952A70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -178,9 +199,9 @@
 				A212B1452824282F001A9588 /* GeometryUtils.swift in Sources */,
 				A24BFBF9282329B500952A70 /* ContentView.swift in Sources */,
 				A212B15128246CA8001A9588 /* PointerStrategy.swift in Sources */,
-				A212B14B28246BB6001A9588 /* ManualManipulation.swift in Sources */,
+				A212B14B28246BB6001A9588 /* ZoomStrategy.swift in Sources */,
 				A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */,
-				A212B14F28246C5D001A9588 /* RecordTranslation.swift in Sources */,
+				A212B14F28246C5D001A9588 /* GrabStrategy.swift in Sources */,
 				A212B14D28246C00001A9588 /* GestureManipulation.swift in Sources */,
 				A212B14828245D99001A9588 /* CustomContext.swift in Sources */,
 				A24BFBFB282329B500952A70 /* Experience.rcproject in Sources */,

@@ -9,88 +9,86 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    
+
     @StateObject var dataModel = DataModel.shared
-    
+
+    @State var showOverlay = true
+
     var body: some View {
-        ZStack{
-            ARViewContainer().ignoresSafeArea()
-            
-            VStack {
-                HStack{
-                    OverlayButtonsView()
-                    Spacer()
-                } .padding()
-                Spacer()
+        NavigationView {
+            ZStack {
+                ARViewContainer().ignoresSafeArea()
             }
+            .navigationTitle(dataModel.appState.title)
+            .font(.body)
+            .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        if dataModel.appState == .zoom {
+                            Button {
+                                dataModel.zoomIn()
+                            } label: {
+                                Label("Zoom In", systemImage: "plus.magnifyingglass")
+                            }
+
+                            Spacer()
+
+                            Button {
+                                dataModel.zoomOut()
+                            } label: {
+                                Label("Zoom Out", systemImage: "minus.magnifyingglass")
+                            }
+                        }
+
+                        Spacer()
+
+                        Menu {
+
+                            Button {
+                                dataModel.setGrabStrategy()
+                            } label: {
+                                Label("Grab", systemImage: "line.3.crossed.swirl.circle")
+                            }
+
+                            Button {
+                                dataModel.setMeasureStrategy()
+                            } label: {
+                                Label("Measure", systemImage: "ruler")
+                            }
+
+                                Button {
+                                    dataModel.setPointerStrategy()
+                                } label: {
+                                    Label("Pointer", systemImage: "circle")
+                                }
+                                Button {
+                                    dataModel.setZoomStrategy()
+                                } label: {
+                                    Label("Zoom Manipulation", systemImage: "plus.magnifyingglass")
+                                }
+                                Button {
+                                    dataModel.setGestureStrategy()
+                                } label: {
+                                    Label("Manipulate", systemImage: "hand")
+
+                            }.opacity(showOverlay ? 1 : 0)
+
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                        .opacity(showOverlay ? 1 : 0)
+
+                    }
+                }
         }
+
     }
 }
 
 #if DEBUG
-struct ContentView_Previews : PreviewProvider {
+struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
 #endif
-
-
-struct OverlayButtonsView: View {
-
-    var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            OverlayButton()
-        }
-    }
-
-}
-
-struct OverlayButton: View {
-
-    
-    @StateObject var dataModel = DataModel.shared
-    @State var isMeasureActive = false
-    @State var isPointerActive = false
-    var body: some View {
-        VStack(alignment: .center, spacing: 10) {
-            Button {
-                dataModel.zoomIn()
-            } label: {
-                Label("Zoom In", systemImage: "plus.magnifyingglass")
-            }
-            Button {
-                dataModel.zoomOut()
-            } label: {
-                Label("Zoom Out", systemImage: "minus.magnifyingglass")
-            }
-            Button {
-                dataModel.toogleRecordingFlag()
-            } label: {
-                Label("Grab", systemImage: "line.3.crossed.swirl.circle")
-            }
-
-            Button {
-                dataModel.toogleMeasureFunctionality()
-            } label: {
-                Label(dataModel.isInMeasureFunctionality ? "Cancel measure" : "Measure", systemImage: "ruler")
-            }
-            Section {
-                Button {
-                    isPointerActive = !isPointerActive
-                    dataModel.tooglePointerFlag()
-                } label: {
-                    Label("Pointer", systemImage: isPointerActive ? "checkmark.circle.fill" : "circle")
-                }
-                Button {
-                    isMeasureActive = !isMeasureActive
-                    dataModel.toogleManipulationFlag(isMeasureActive)
-                } label: {
-                    Label("Manipulate", systemImage: isMeasureActive ? "checkmark.circle.fill" : "circle")
-                }
-            }
-
-        }
-    }
-}
-

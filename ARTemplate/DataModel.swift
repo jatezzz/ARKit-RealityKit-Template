@@ -11,62 +11,111 @@ import RealityKit
 import SwiftUI
 import ARKit
 
+enum AppState: Equatable {
+    case zoom
+    case gesture
+    case grab
+    case pointer
+    case measure
+
+    var title: String {
+        switch self {
+        case .zoom:
+            return "Manipulate the object with the buttons"
+        case .grab:
+            return "Tap the screen to save and restore object's position"
+        case .pointer:
+            return "Tap the screen to add circles"
+        case .measure:
+            return "Tap two points to see the distance"
+        default:
+            return "Manipulate the object thought gestures"
+        }
+    }
+
+    var strategy: Strategy {
+        switch self {
+        case .zoom:
+            return ZoomStrategy()
+        case .grab:
+            return GrabStrategy()
+        case .pointer:
+            return PointerStrategy()
+        case .measure:
+            return MeasureStrategy()
+        default:
+            return GestureStrategy()
+        }
+    }
+}
+
 final class DataModel: ObservableObject {
 
     static var shared = DataModel()
-    
+
     @Published var arView: ARView!
-    
+
     var container: Entity & HasCollision
-    
-    @Published var context : CustomContext = CustomContext()
-    
+
+    @Published var context: CustomContext = CustomContext()
+
+    @Published var appState = AppState.gesture {
+        didSet {
+            print(" === \(appState) ===")
+            context.update(strategy: appState.strategy, arView: arView, container: container)
+        }
+    }
+
     init() {
-        
+
         arView = ARView(frame: .zero)
-        
-        let boxAnchor = try! Experience.loadBox()
-        
+
+        guard let boxAnchor = try? Experience.loadBox() else {
+            container = ModelEntity()
+            return
+        }
+
         boxAnchor.generateCollisionShapes(recursive: true)
-        //First you have to set physic enabled on Reality Composer
+        // First you have to set physic enabled on Reality Composer
         container = (boxAnchor.steelBox as? Entity & HasCollision)!
         arView.scene.addAnchor(boxAnchor)
-        arView.debugOptions = .showPhysics
-        
+        arView.debugOptions = [.showPhysics]
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnARView))
         arView.addGestureRecognizer(tapGesture)
-        
-        context.setup(strategy: GestureManipulation(), arView: arView, container: container)
+        appState = .gesture
     }
-    
+
     @objc func tapOnARView(sender: UITapGestureRecognizer) {
         guard let arView = arView else { return }
         context.handleScreenTouch(sender: sender, arView: arView, container: container)
     }
     func zoomIn() {
-        context.update(strategy: ManualManipulation(), arView: arView, container: container)
         context.handleButton("in", arView: arView, container: container)
     }
-    
+
     func zoomOut() {
-        context.update(strategy: ManualManipulation(), arView: arView, container: container)
         context.handleButton("out", arView: arView, container: container)
     }
-    
-    func toogleManipulationFlag(_ isManual: Bool) {
-        context.update(strategy: isManual ?  GestureManipulation(): ManualManipulation(), arView: arView, container: container)
+
+    func setZoomStrategy() {
+        appState = .zoom
     }
 
-    func toogleRecordingFlag() {
-        context.update(strategy: RecordStrategy(), arView: arView, container: container)
+    func setGrabStrategy() {
+        appState = .grab
     }
-    
-    func toogleMeasureFunctionality() {
-        context.update(strategy: MeasureStrategy(), arView: arView, container: container)
+
+    func setPointerStrategy() {
+        appState = .pointer
     }
-    
-    func tooglePointerFlag() {
-        context.update(strategy: PointerStrategy(), arView: arView, container: container)
+
+    func setMeasureStrategy() {
+        appState = .measure
+    }
+
+    func setGestureStrategy() {
+        appState = .gesture
     }
 
 }

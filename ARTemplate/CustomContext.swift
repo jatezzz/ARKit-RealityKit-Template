@@ -19,23 +19,18 @@ protocol Strategy {
 
 class CustomContext {
 
-    private var strategy: Strategy? = nil
+    private var strategy: Strategy?
 
-    func setup(strategy: Strategy, arView: ARView, container: Entity & HasCollision) {
+    func update(strategy: Strategy, arView: ARView, container: Entity & HasCollision) {
+        self.strategy?.reset(arView: arView, container: container)
         self.strategy = strategy
         self.strategy?.setup(arView: arView, container: container)
     }
 
-    func update(strategy: Strategy, arView: ARView, container: Entity & HasCollision) {
-        self.strategy?.reset(arView: arView, container:container)
-        self.strategy = strategy
-        self.strategy?.setup(arView: arView, container:container)
-    }
-
     func handleScreenTouch(sender: UITapGestureRecognizer, arView: ARView, container: Entity & HasCollision) {
-        strategy?.handleScreenTouch(sender: sender,arView: arView, container: container)
+        strategy?.handleScreenTouch(sender: sender, arView: arView, container: container)
     }
-    func handleButton(_ data: String,arView: ARView, container: Entity & HasCollision) {
-        strategy?.handleButton(data,arView: arView, container:container)
+    func handleButton(_ data: String, arView: ARView, container: Entity & HasCollision) {
+        strategy?.handleButton(data, arView: arView, container: container)
     }
 }

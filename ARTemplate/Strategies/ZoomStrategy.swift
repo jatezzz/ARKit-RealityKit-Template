@@ -1,5 +1,5 @@
 //
-//  ManualManipulation.swift
+//  ZoomStrategy.swift
 //  ARTemplate
 //
 //  Created by John Trujillo on 5/5/22.
@@ -9,7 +9,7 @@ import Foundation
 import ARKit
 import RealityKit
 
-class ManualManipulation: Strategy {
+class ZoomStrategy: Strategy {
 
     var factor: Float = 1
     var increment: Float = 0.3
@@ -27,10 +27,10 @@ class ManualManipulation: Strategy {
     }
 
     func handleButton(_ data: String, arView: ARView, container: Entity & HasCollision) {
-        if (data == "in") {
+        if data == "in" {
             factor += increment
         }
-        if (data == "out") {
+        if data == "out" {
             factor -= increment
         }
         container.transform.scale = [1, 1, 1] * factor

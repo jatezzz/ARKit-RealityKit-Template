@@ -9,11 +9,11 @@ import RealityKit
 import SwiftUI
 
 struct ARViewContainer: UIViewRepresentable {
-    
+
     func makeUIView(context: Context) -> ARView {
         return DataModel.shared.arView
     }
-    
+
     func updateUIView(_ uiView: ARView, context: Context) {}
-    
+
 }

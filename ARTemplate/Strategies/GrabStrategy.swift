@@ -9,7 +9,7 @@ import Foundation
 import RealityKit
 import ARKit
 
-class RecordStrategy: Strategy {
+class GrabStrategy: Strategy {
 
     var customBool = false
     var savedTransform: Transform?
@@ -22,7 +22,7 @@ class RecordStrategy: Strategy {
 
     func handleScreenTouch(sender: UITapGestureRecognizer, arView: ARView, container: Entity & HasCollision) {
         if customBool, let savedTransform = savedTransform {
-            container.transform.translation = container.transform.translation - (savedTransform.translation - arView.cameraTransform.translation)
+            container.transform.translation -= savedTransform.translation - arView.cameraTransform.translation
         }
         savedTransform = arView.cameraTransform
         customBool = !customBool

@@ -67,7 +67,7 @@ class MeasureStrategy: Strategy {
             return
         }
         let distance = GeometryUtils.calculateDistance(firstNode: measurementPoints[0], secondNode: measurementPoints[1])
-        let textModel = GeometryUtils.createText(text: "\(distance)m")
+        let textModel = GeometryUtils.createText(text: "\(distance)cm")
         textModel.transform.scale = [1, 1, 1] * 0.05
         textModel.transform.rotation = Transform(pitch: 0.0, yaw: Float.pi, roll: 0.0).rotation
         textModel.setPosition(measurementPoints[1].position + [0, 0.01, 0], relativeTo: nil)
@@ -84,4 +84,3 @@ class MeasureStrategy: Strategy {
     }
 
 }
-

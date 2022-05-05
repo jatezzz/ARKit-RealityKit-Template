@@ -27,7 +27,7 @@ class PointerStrategy: Strategy {
     func handleScreenTouch(sender: UITapGestureRecognizer, arView: ARView, container: Entity & HasCollision) {
         let location = sender.location(in: arView)
         if let result = raycastResult(fromLocation: location, arView: arView) {
-            addTemporalCircle(raycastResult: result, container: container)
+            addCircle(raycastResult: result, container: container)
         }
     }
 
@@ -44,7 +44,7 @@ class PointerStrategy: Strategy {
         return results.first
     }
 
-    private func addTemporalCircle(raycastResult: CollisionCastHit, container: Entity & HasCollision) {
+    private func addCircle(raycastResult: CollisionCastHit, container: Entity & HasCollision) {
         let circleNode = GeometryUtils.createSphere(color: UIColor(red: 1, green: 0, blue: 0, alpha: 0.6))
         if pointerPoints.count >= 3 {
             for circle in pointerPoints {

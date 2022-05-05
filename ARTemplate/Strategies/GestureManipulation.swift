@@ -1,5 +1,5 @@
 //
-//  GestureManipulation.swift
+//  GestureStrategy.swift
 //  ARTemplate
 //
 //  Created by John Trujillo on 5/5/22.
@@ -9,7 +9,7 @@ import Foundation
 import RealityKit
 import SwiftUI
 
-class GestureManipulation: Strategy {
+class GestureStrategy: Strategy {
 
     var gesturesSaved: [UIGestureRecognizer] = []
 
