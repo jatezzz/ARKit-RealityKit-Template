@@ -1,3 +1,12 @@
 [
-
+  {
+    "libraryIdentifier" : "b3eea09a0537f29c28d72541e5b63283",
+    "format" : "model",
+    "displayName" : "cup_saucer_set.usdz"
+  },
+  {
+    "libraryIdentifier" : "364ad193e9cdde8f344d200495a12aca",
+    "format" : "model",
+    "displayName" : "toy_biplane.usdz"
+  }
 ]

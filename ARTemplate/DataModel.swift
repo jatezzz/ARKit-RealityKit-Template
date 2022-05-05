@@ -11,44 +11,6 @@ import RealityKit
 import SwiftUI
 import ARKit
 
-enum AppState: Equatable {
-    case zoom
-    case gesture
-    case grab
-    case pointer
-    case measure
-
-    var title: String {
-        switch self {
-        case .zoom:
-            return "Manipulate the object with the buttons"
-        case .grab:
-            return "Tap the screen to save and restore object's position"
-        case .pointer:
-            return "Tap the screen to add circles"
-        case .measure:
-            return "Tap two points to see the distance"
-        default:
-            return "Manipulate the object thought gestures"
-        }
-    }
-
-    var strategy: Strategy {
-        switch self {
-        case .zoom:
-            return ZoomStrategy()
-        case .grab:
-            return GrabStrategy()
-        case .pointer:
-            return PointerStrategy()
-        case .measure:
-            return MeasureStrategy()
-        default:
-            return GestureStrategy()
-        }
-    }
-}
-
 final class DataModel: ObservableObject {
 
     static var shared = DataModel()
@@ -70,14 +32,14 @@ final class DataModel: ObservableObject {
 
         arView = ARView(frame: .zero)
 
-        guard let boxAnchor = try? Experience.loadBox() else {
+        guard let boxAnchor = try? Experience.loadMyScene() else {
             container = ModelEntity()
             return
         }
 
         boxAnchor.generateCollisionShapes(recursive: true)
         // First you have to set physic enabled on Reality Composer
-        container = (boxAnchor.steelBox as? Entity & HasCollision)!
+        container = (boxAnchor.cup as? Entity & HasCollision)!
         arView.scene.addAnchor(boxAnchor)
         arView.debugOptions = [.showPhysics]
 
@@ -90,6 +52,7 @@ final class DataModel: ObservableObject {
         guard let arView = arView else { return }
         context.handleScreenTouch(sender: sender, arView: arView, container: container)
     }
+
     func zoomIn() {
         context.handleButton("in", arView: arView, container: container)
     }
@@ -118,11 +81,4 @@ final class DataModel: ObservableObject {
         appState = .gesture
     }
 
-}
-
-extension Entity {
-    /// Billboards the entity to the targetPosition which should be provided in world space.
-    func billboard(targetPosition: SIMD3<Float>) {
-        look(at: targetPosition, from: position(relativeTo: nil), relativeTo: nil)
-    }
 }

@@ -88,8 +88,8 @@
                         0,
                         1.0003238916397095,
                         0,
-                        0,
-                        0.05000000074505806,
+                        -0.22423632442951202,
+                        0.049999658018350601,
                         0,
                         1
                       ]
@@ -97,7 +97,128 @@
                   },
                   "7F5F1ADC-E5E4-4EF5-A5B5-FC43B071FFA5" : null,
                   "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
-                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null
+                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
+                  "CF78B24D-51C7-475F-BE52-7D1709617079" : null,
+                  "D45C03F5-47A1-4E8C-92B5-BBB6A05AE431" : {
+                    "overrides" : {
+                      "children" : {
+                        "USDScene" : {
+                          "overrides" : {
+                            "arguments" : [
+                              [
+                                "includeSceneScaling",
+                                {
+                                  "typeName" : "Bool",
+                                  "value" : false
+                                }
+                              ],
+                              [
+                                "subpath",
+                                {
+                                  "typeName" : "String",
+                                  "value" : ""
+                                }
+                              ],
+                              [
+                                "url",
+                                {
+                                  "typeName" : "String",
+                                  "value" : "model:b3eea09a0537f29c28d72541e5b63283\/cup_saucer_set.usdz"
+                                }
+                              ],
+                              [
+                                "withDescendants",
+                                {
+                                  "typeName" : "Bool",
+                                  "value" : true
+                                }
+                              ]
+                            ],
+                            "factory" : {
+                              "identifier" : "com.apple.af.FileImportAssetFactory",
+                              "version" : "0.0"
+                            },
+                            "runtimeAttributes" : [
+                              [
+                                "RuntimeIdentifier",
+                                {
+                                  "typeName" : "UUID",
+                                  "value" : "009B3F76-98FA-4A0A-9EAB-7078FAB95F58"
+                                }
+                              ]
+                            ]
+                          },
+                          "transform" : {
+                            "matrix" : [
+                              0.0099999997764825821,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0.0099999997764825821,
+                              0,
+                              0,
+                              0,
+                              0,
+                              0.0099999997764825821,
+                              0,
+                              0,
+                              0,
+                              0,
+                              1
+                            ]
+                          }
+                        }
+                      },
+                      "factory" : {
+                        "identifier" : "com.apple.af.Group",
+                        "version" : "0.0"
+                      },
+                      "runtimeAttributes" : [
+                        [
+                          "RuntimeIdentifier",
+                          {
+                            "typeName" : "UUID",
+                            "value" : "CC13634F-3A6B-4419-BBCF-C19A2192B251"
+                          }
+                        ],
+                        [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "cup"
+                          }
+                        ],
+                        [
+                          "rigidBody-enabled",
+                          {
+                            "typeName" : "Bool",
+                            "value" : true
+                          }
+                        ]
+                      ]
+                    },
+                    "transform" : {
+                      "matrix" : [
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        1
+                      ]
+                    }
+                  }
                 },
                 "factory" : null,
                 "runtimeAttributes" : [
@@ -111,24 +232,24 @@
                 ]
               },
               "physicsMode" : "grid",
-              "title" : "Box",
+              "title" : "MyScene",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.99772864580154419,
+                  0.80153739452362061,
+                  3.25962834502036e-09,
+                  -0.59794455766677856,
                   0,
-                  -0.067360416054725647,
+                  -0.4317956268787384,
+                  0.69175422191619873,
+                  -0.57881653308868408,
                   0,
-                  -0.051647283136844635,
-                  0.64196938276290894,
-                  -0.76498872041702271,
+                  0.41363078355789185,
+                  0.72213304042816162,
+                  0.55446672439575195,
                   0,
-                  0.043243333697319031,
-                  0.76673018932342529,
-                  0.64051133394241333,
-                  0,
-                  0.021697148680686951,
-                  0.4951862096786499,
-                  0.4084906280040741,
+                  0.25910353660583496,
+                  0.466756671667099,
+                  0.35713902115821838,
                   1
                 ],
                 "sceneTransform" : [

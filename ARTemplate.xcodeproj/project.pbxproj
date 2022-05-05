@@ -11,10 +11,12 @@
 		A212B1462824291C001A9588 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFC0628232BAD00952A70 /* DataModel.swift */; };
 		A212B14828245D99001A9588 /* CustomContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14728245D99001A9588 /* CustomContext.swift */; };
 		A212B14B28246BB6001A9588 /* ZoomStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14A28246BB6001A9588 /* ZoomStrategy.swift */; };
-		A212B14D28246C00001A9588 /* GestureManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14C28246C00001A9588 /* GestureManipulation.swift */; };
+		A212B14D28246C00001A9588 /* GestureStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14C28246C00001A9588 /* GestureStrategy.swift */; };
 		A212B14F28246C5D001A9588 /* GrabStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B14E28246C5D001A9588 /* GrabStrategy.swift */; };
 		A212B15128246CA8001A9588 /* PointerStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B15028246CA8001A9588 /* PointerStrategy.swift */; };
 		A212B15328246CC5001A9588 /* MeasureStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B15228246CC5001A9588 /* MeasureStrategy.swift */; };
+		A212B15728248265001A9588 /* Entity+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B15628248265001A9588 /* Entity+Extension.swift */; };
+		A212B159282483AD001A9588 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B158282483AD001A9588 /* AppState.swift */; };
 		A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBF6282329B500952A70 /* AppDelegate.swift */; };
 		A24BFBF9282329B500952A70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBF8282329B500952A70 /* ContentView.swift */; };
 		A24BFBFB282329B500952A70 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBFA282329B500952A70 /* Experience.rcproject */; };
@@ -27,10 +29,12 @@
 		A212B1442824282F001A9588 /* GeometryUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryUtils.swift; sourceTree = "<group>"; };
 		A212B14728245D99001A9588 /* CustomContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContext.swift; sourceTree = "<group>"; };
 		A212B14A28246BB6001A9588 /* ZoomStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomStrategy.swift; sourceTree = "<group>"; };
-		A212B14C28246C00001A9588 /* GestureManipulation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureManipulation.swift; sourceTree = "<group>"; };
+		A212B14C28246C00001A9588 /* GestureStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureStrategy.swift; sourceTree = "<group>"; };
 		A212B14E28246C5D001A9588 /* GrabStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabStrategy.swift; sourceTree = "<group>"; };
 		A212B15028246CA8001A9588 /* PointerStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerStrategy.swift; sourceTree = "<group>"; };
 		A212B15228246CC5001A9588 /* MeasureStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureStrategy.swift; sourceTree = "<group>"; };
+		A212B15628248265001A9588 /* Entity+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extension.swift"; sourceTree = "<group>"; };
+		A212B158282483AD001A9588 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		A24BFBF3282329B500952A70 /* ARTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24BFBF6282329B500952A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24BFBF8282329B500952A70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,12 +60,31 @@
 			isa = PBXGroup;
 			children = (
 				A212B14A28246BB6001A9588 /* ZoomStrategy.swift */,
-				A212B14C28246C00001A9588 /* GestureManipulation.swift */,
+				A212B14C28246C00001A9588 /* GestureStrategy.swift */,
 				A212B14E28246C5D001A9588 /* GrabStrategy.swift */,
 				A212B15028246CA8001A9588 /* PointerStrategy.swift */,
 				A212B15228246CC5001A9588 /* MeasureStrategy.swift */,
 			);
 			path = Strategies;
+			sourceTree = "<group>";
+		};
+		A212B1552824824C001A9588 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A212B1442824282F001A9588 /* GeometryUtils.swift */,
+				A212B15628248265001A9588 /* Entity+Extension.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		A212B15A282483C1001A9588 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				A212B14928246B8B001A9588 /* Strategies */,
+				A212B14728245D99001A9588 /* CustomContext.swift */,
+				A212B158282483AD001A9588 /* AppState.swift */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 		A24BFBEA282329B500952A70 = {
@@ -83,16 +106,15 @@
 		A24BFBF5282329B500952A70 /* ARTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				A212B14928246B8B001A9588 /* Strategies */,
+				A24BFC0628232BAD00952A70 /* DataModel.swift */,
+				A24BFC0828232C0F00952A70 /* ARViewContainer.swift */,
+				A212B15A282483C1001A9588 /* State */,
+				A212B1552824824C001A9588 /* Util */,
 				A24BFBF6282329B500952A70 /* AppDelegate.swift */,
 				A24BFBF8282329B500952A70 /* ContentView.swift */,
 				A24BFBFA282329B500952A70 /* Experience.rcproject */,
 				A24BFBFC282329B600952A70 /* Assets.xcassets */,
 				A24BFBFE282329B600952A70 /* Preview Content */,
-				A24BFC0628232BAD00952A70 /* DataModel.swift */,
-				A24BFC0828232C0F00952A70 /* ARViewContainer.swift */,
-				A212B1442824282F001A9588 /* GeometryUtils.swift */,
-				A212B14728245D99001A9588 /* CustomContext.swift */,
 			);
 			path = ARTemplate;
 			sourceTree = "<group>";
@@ -202,9 +224,11 @@
 				A212B14B28246BB6001A9588 /* ZoomStrategy.swift in Sources */,
 				A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */,
 				A212B14F28246C5D001A9588 /* GrabStrategy.swift in Sources */,
-				A212B14D28246C00001A9588 /* GestureManipulation.swift in Sources */,
+				A212B14D28246C00001A9588 /* GestureStrategy.swift in Sources */,
 				A212B14828245D99001A9588 /* CustomContext.swift in Sources */,
 				A24BFBFB282329B500952A70 /* Experience.rcproject in Sources */,
+				A212B159282483AD001A9588 /* AppState.swift in Sources */,
+				A212B15728248265001A9588 /* Entity+Extension.swift in Sources */,
 				A212B15328246CC5001A9588 /* MeasureStrategy.swift in Sources */,
 				A24BFC0928232C0F00952A70 /* ARViewContainer.swift in Sources */,
 				A212B1462824291C001A9588 /* DataModel.swift in Sources */,
