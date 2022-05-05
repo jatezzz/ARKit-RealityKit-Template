@@ -9,11 +9,11 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    
+
     @StateObject var dataModel = DataModel.shared
-    
+
     @State var showOverlay = true
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -30,32 +30,32 @@ struct ContentView: View {
                         } label: {
                             Label("Zoom In", systemImage: "plus.magnifyingglass")
                         }
-                        
+
                         Spacer()
-                        
+
                         Button {
                             dataModel.zoomOut()
                         } label: {
                             Label("Zoom Out", systemImage: "minus.magnifyingglass")
                         }
                     }
-                    
+
                     Spacer()
-                    
+
                     Menu {
-                        
+
                         Button {
                             dataModel.setGrabStrategy()
                         } label: {
                             Label("Grab", systemImage: "line.3.crossed.swirl.circle")
                         }
-                        
+
                         Button {
                             dataModel.setMeasureStrategy()
                         } label: {
                             Label("Measure", systemImage: "ruler")
                         }
-                        
+
                         Button {
                             dataModel.setPointerStrategy()
                         } label: {
@@ -70,18 +70,18 @@ struct ContentView: View {
                             dataModel.setGestureStrategy()
                         } label: {
                             Label("Manipulate", systemImage: "hand")
-                            
+
                         }.opacity(showOverlay ? 1 : 0)
-                        
+
                     } label: {
                         Image(systemName: "gear")
                     }
                     .opacity(showOverlay ? 1 : 0)
-                    
+
                 }
             }
         }
-        
+
     }
 }
 
