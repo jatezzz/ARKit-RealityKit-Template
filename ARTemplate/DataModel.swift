@@ -11,6 +11,87 @@ import RealityKit
 import SwiftUI
 import ARKit
 
+class Context {
+
+    private var strategy: Strategy? = nil
+
+    func setup(strategy: Strategy, arView: ARView, container: Entity & HasCollision) {
+        self.strategy = strategy
+        self.strategy?.setup("",arView: arView, container:container)
+    }
+
+    func update(strategy: Strategy, arView: ARView, container: Entity & HasCollision) {
+        self.strategy?.reset("",arView: arView, container:container)
+        self.strategy = strategy
+        self.strategy?.setup("",arView: arView, container:container)
+    }
+
+    func handleScreenTouch(arView: ARView, container: Entity & HasCollision) {
+        strategy?.handleScreenTouch("",arView: arView, container: container)
+    }
+    func handleButton(_ data: String,arView: ARView, container: Entity & HasCollision) {
+        strategy?.handleButton(data,arView: arView, container:container)
+    }
+}
+
+protocol Strategy {
+
+    func setup(_ data: String, arView: ARView, container: Entity & HasCollision)
+    func reset(_ data: String, arView: ARView, container: Entity & HasCollision)
+    func handleScreenTouch(_ data: String, arView: ARView, container: Entity & HasCollision)
+    func handleButton(_ data: String, arView: ARView, container: Entity & HasCollision)
+}
+
+class ManualManipulation: Strategy {
+    
+    var factor: Float = 1
+    var increment: Float = 0.3
+    
+    func setup(_ data: String, arView: ARView, container: Entity & HasCollision){
+        factor = 1
+    }
+    func reset(_ data: String, arView: ARView, container: Entity & HasCollision){
+        
+    }
+    func handleScreenTouch(_ data: String, arView: ARView, container: Entity & HasCollision) {
+        
+    }
+    
+    func handleButton(_ data: String, arView: ARView, container: Entity & HasCollision) {
+        factor += increment
+        container.transform.scale = [1, 1, 1] * factor
+        
+        factor -= increment
+        container.transform.scale = [1, 1, 1] * factor
+    }
+}
+
+class AutoManipulation: Strategy {
+    
+    var gesturesSaved: [UIGestureRecognizer] = []
+    
+    func setup(_ data: String, arView: ARView, container: Entity & HasCollision){
+            gesturesSaved = []
+        arView.installGestures([.scale, .rotation], for: container).forEach {
+                gesturesSaved.append($0)
+            }
+
+    }
+    func reset(_ data: String, arView: ARView, container: Entity & HasCollision){
+            gesturesSaved.forEach {
+                arView.removeGestureRecognizer($0)
+            }
+    }
+    
+    func handleScreenTouch(_ data: String, arView: ARView, container: Entity & HasCollision) {
+       
+    }
+
+    func handleButton(_ data: String, arView: ARView, container: Entity & HasCollision) {
+       
+    }
+}
+
 final class DataModel: ObservableObject {
     
     static var shared = DataModel()
@@ -21,23 +102,19 @@ final class DataModel: ObservableObject {
     
     var container: Entity & HasCollision
     
-    var factor: Float = 1
-    var increment: Float = 0.3
-    
     @Published var isInMeasureFunctionality = false
     @Published var isManipulationEnabled = false
     @Published var isRecordingEnabled = false
     @Published var isPointerEnabled = false
-    var gesturesSaved: [UIGestureRecognizer] = []
     
     private var measurementPoints: [Entity] = []
     private var pointerPoints: [Entity] = []
     
-    
     var customBool = false
     var savedTransform: Transform?
-    
+    var context : Context = Context()
     init() {
+        
         arView = ARView(frame: .zero)
         
         let boxAnchor = try! Experience.loadBox()
@@ -48,9 +125,10 @@ final class DataModel: ObservableObject {
         arView.scene.addAnchor(boxAnchor)
         arView.debugOptions = .showPhysics
         
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnARView))
         arView.addGestureRecognizer(tapGesture)
+        
+        context.setup(strategy: AutoManipulation(), arView: arView, container: container)
     }
     
     @objc func tapOnARView(sender: UITapGestureRecognizer) {
@@ -86,31 +164,6 @@ final class DataModel: ObservableObject {
 
         let results = arView.scene.raycast(origin: ray.origin, direction: ray.direction)
         return results.first
-    }
-    
-    func zoomIn() {
-        factor += increment
-        container.transform.scale = [1, 1, 1] * factor
-    }
-
-    func zoomOut() {
-        factor -= increment
-        container.transform.scale = [1, 1, 1] * factor
-    }
-    
-    func toogleManipulationFlag() {
-        isManipulationEnabled = !isManipulationEnabled
-        if isManipulationEnabled {
-            gesturesSaved = []
-            arView.installGestures([.scale, .rotation], for: container).forEach {
-                gesturesSaved.append($0)
-            }
-        } else {
-            gesturesSaved.forEach {
-                arView.removeGestureRecognizer($0)
-            }
-
-        }
     }
 
     func toogleRecordingFlag() {

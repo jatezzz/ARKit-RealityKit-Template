@@ -55,12 +55,12 @@ struct OverlayButton: View {
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
             Button {
-                dataModel.zoomIn()
+//                dataModel.zoomIn()
             } label: {
                 Label("Zoom In", systemImage: "plus.magnifyingglass")
             }
             Button {
-                dataModel.zoomOut()
+//                dataModel.zoomOut()
             } label: {
                 Label("Zoom Out", systemImage: "minus.magnifyingglass")
             }
@@ -84,7 +84,7 @@ struct OverlayButton: View {
                 }
                 Button {
                     isMeasureActive = !isMeasureActive
-                    dataModel.toogleManipulationFlag()
+//                    dataModel.toogleManipulationFlag()
                 } label: {
                     Label("Manipulate", systemImage: isMeasureActive ? "checkmark.circle.fill" : "circle")
                 }
