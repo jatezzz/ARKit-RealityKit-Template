@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A212B1452824282F001A9588 /* GeometryUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A212B1442824282F001A9588 /* GeometryUtils.swift */; };
+		A212B1462824291C001A9588 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFC0628232BAD00952A70 /* DataModel.swift */; };
 		A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBF6282329B500952A70 /* AppDelegate.swift */; };
 		A24BFBF9282329B500952A70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBF8282329B500952A70 /* ContentView.swift */; };
 		A24BFBFB282329B500952A70 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = A24BFBFA282329B500952A70 /* Experience.rcproject */; };
 		A24BFBFD282329B600952A70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A24BFBFC282329B600952A70 /* Assets.xcassets */; };
 		A24BFC00282329B600952A70 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A24BFBFF282329B600952A70 /* Preview Assets.xcassets */; };
-		A24BFC0728232BAD00952A70 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFC0628232BAD00952A70 /* DataModel.swift */; };
 		A24BFC0928232C0F00952A70 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24BFC0828232C0F00952A70 /* ARViewContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A212B1442824282F001A9588 /* GeometryUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryUtils.swift; sourceTree = "<group>"; };
 		A24BFBF3282329B500952A70 /* ARTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24BFBF6282329B500952A70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A24BFBF8282329B500952A70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				A24BFBFE282329B600952A70 /* Preview Content */,
 				A24BFC0628232BAD00952A70 /* DataModel.swift */,
 				A24BFC0828232C0F00952A70 /* ARViewContainer.swift */,
+				A212B1442824282F001A9588 /* GeometryUtils.swift */,
 			);
 			path = ARTemplate;
 			sourceTree = "<group>";
@@ -146,11 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A212B1452824282F001A9588 /* GeometryUtils.swift in Sources */,
 				A24BFBF9282329B500952A70 /* ContentView.swift in Sources */,
-				A24BFC0728232BAD00952A70 /* DataModel.swift in Sources */,
 				A24BFBF7282329B500952A70 /* AppDelegate.swift in Sources */,
 				A24BFBFB282329B500952A70 /* Experience.rcproject in Sources */,
 				A24BFC0928232C0F00952A70 /* ARViewContainer.swift in Sources */,
+				A212B1462824291C001A9588 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
